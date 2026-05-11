@@ -1,4 +1,4 @@
-# MADs Crusty Paint
+# MADs Crusty CGA Paint
 
 320 by 200 indexed canvas, CGA-style 4-color framebuffer, Vite + TypeScript.
 
@@ -39,7 +39,3 @@ Almost always a `base` mismatch: the `base` path must exactly match the repo seg
 ## Tools
 
 Pencil, brush, eraser, line, bucket, colour picker, rectangle select, lasso. Patterns apply when tool size is greater than 1. Enter merges a floating selection; Escape cancels it.
-
-## Palette
-
-Index 0 is paper (16 EGA background choices). Indices 1-3 are the active CGA set (set 0 or set 1).
