@@ -1,0 +1,446 @@
+:root {
+	color-scheme: light;
+	--cga-font: "VT323", "Courier New", Courier, monospace;
+	/* --cga-stroke set in applyCgaShellTheme from root font size; default until first theme pass */
+	--cga-stroke: 3px;
+	font-family: var(--cga-font);
+	font-size: 18px;
+	background: var(--cga-workbench-bg, var(--cga-panel-bg, #000000));
+	-webkit-font-smoothing: none;
+	font-synthesis: none;
+}
+
+html {
+	font-family: var(--cga-font);
+	-webkit-font-smoothing: none;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body,
+button,
+input,
+select,
+textarea,
+optgroup {
+	font-family: var(--cga-font);
+}
+
+body {
+	margin: 0;
+	padding: var(--ui-shell-body-padding, 12px);
+	background: var(--cga-workbench-bg, var(--cga-panel-bg, #000000));
+	color: var(--cga-panel-fg, #000000);
+}
+
+#app {
+	font-family: var(--cga-font);
+	-webkit-font-smoothing: none;
+}
+
+.shell :focus-visible {
+	outline: var(--cga-stroke, 3px) dotted var(--cga-border, var(--cga-input-border));
+	outline-offset: 2px;
+}
+
+.shell {
+	width: fit-content;
+	max-width: var(--ui-shell-max-width-calc, calc(100vw - 24px));
+	margin: 0 auto;
+	border: var(--cga-stroke, 3px) solid var(--cga-border, #000000);
+	background: var(--cga-panel-bg, #ffffff);
+	color: var(--cga-panel-fg, #000000);
+	font-family: var(--cga-font);
+	/* Offset matches stroke so the shadow reads as chunky pixel depth, always palette-driven */
+	box-shadow: var(--cga-stroke, 3px) var(--cga-stroke, 3px) 0 var(--cga-shadow, var(--cga-border, #000000));
+}
+
+.shell *,
+.shell *::before,
+.shell *::after {
+	font-family: var(--cga-font);
+	-webkit-font-smoothing: none;
+}
+
+.title-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 2px 4px;
+	font-family: var(--cga-font);
+	background: var(--cga-title-bg, #000080);
+	color: var(--cga-title-fg, #ffffff);
+	font-weight: bold;
+	font-size: 22px;
+	border-bottom: var(--cga-stroke, 3px) solid var(--cga-border, #000000);
+}
+
+.menu-bar {
+	display: flex;
+	gap: 0;
+	font-family: var(--cga-font);
+	border-bottom: var(--cga-stroke, 3px) solid var(--cga-border, #000000);
+	background: var(--cga-menu-bg, #ffffff);
+	color: var(--cga-menu-fg, #000000);
+}
+
+.chrome-btn {
+	border: none;
+	background: transparent;
+	padding: 2px 10px;
+	font-family: var(--cga-font);
+	font-size: 20px;
+	font-weight: inherit;
+	font-style: inherit;
+	line-height: 1.2;
+	cursor: pointer;
+	color: inherit;
+}
+
+.chrome-btn:hover {
+	background: var(--cga-menu-hover-bg, #000080);
+	color: var(--cga-menu-hover-fg, #ffffff);
+}
+
+.body-row {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	min-height: 0;
+}
+
+.side-panel {
+	flex: 1 1 auto;
+	min-width: 0;
+	padding: var(--ui-gap-md, 8px);
+	display: flex;
+	flex-direction: column;
+	gap: var(--ui-gap-md, 8px);
+	font-family: var(--cga-font);
+	background: var(--cga-panel-bg, #ffffff);
+	color: var(--cga-panel-fg, #000000);
+}
+
+.options-row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--ui-gap-md, 8px);
+	justify-content: space-between;
+}
+
+.options-cluster {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--ui-gap-md, 8px);
+	min-width: 0;
+}
+
+.options-cluster--actions {
+	margin-inline-start: auto;
+}
+
+.options-row .options-labelled-control {
+	display: inline-flex;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--ui-gap-xs, 4px);
+}
+
+.options-row label {
+	display: flex;
+	align-items: center;
+	gap: var(--ui-gap-xs, 4px);
+	font-size: 18px;
+	color: inherit;
+}
+
+.options-row .chrome-btn {
+	font-size: 18px;
+}
+
+.cga-dropdown {
+	position: relative;
+	display: inline-block;
+	flex-shrink: 0;
+	vertical-align: middle;
+}
+
+.cga-dropdown__face {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.35em;
+	width: 100%;
+	min-height: 1.6em;
+	padding: 1px 6px;
+	font-family: var(--cga-font);
+	font-size: 18px;
+	font-weight: inherit;
+	text-align: left;
+	cursor: pointer;
+	border: var(--cga-stroke, 3px) solid var(--cga-input-border, #000000);
+	background: var(--cga-input-bg, #ffffff);
+	color: var(--cga-input-fg, #000000);
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.cga-dropdown__face:disabled {
+	opacity: 0.45;
+	cursor: default;
+}
+
+.cga-dropdown__face::after {
+	content: "v";
+	font-family: var(--cga-font);
+	font-size: 0.72em;
+	font-weight: 700;
+	line-height: 1;
+	opacity: 0.9;
+	flex-shrink: 0;
+	-webkit-font-smoothing: none;
+	font-synthesis: none;
+}
+
+.cga-dropdown__list {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 100%;
+	z-index: 50;
+	min-width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow-x: visible;
+	overflow-y: visible;
+	border: var(--cga-stroke, 3px) solid var(--cga-input-border, #000000);
+	background: var(--cga-input-bg, #ffffff);
+	color: var(--cga-input-fg, #000000);
+	box-shadow: var(--cga-stroke, 3px) var(--cga-stroke, 3px) 0 var(--cga-shadow, var(--cga-border, #000000));
+}
+
+.cga-dropdown__list--scroll {
+	overflow-y: auto;
+	scrollbar-gutter: stable;
+	scrollbar-width: thin;
+	scrollbar-color: var(--cga-border) var(--cga-input-bg);
+}
+
+.cga-dropdown__list--scroll::-webkit-scrollbar {
+	width: 10px;
+}
+
+.cga-dropdown__list--scroll::-webkit-scrollbar-track {
+	background: var(--cga-input-bg);
+}
+
+.cga-dropdown__list--scroll::-webkit-scrollbar-thumb {
+	background: var(--cga-border);
+	border: 2px solid var(--cga-input-bg);
+}
+
+.cga-dropdown__option {
+	display: block;
+	width: max-content;
+	min-width: 100%;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 2px 8px;
+	font-family: var(--cga-font);
+	font-size: 18px;
+	text-align: left;
+	white-space: nowrap;
+	cursor: pointer;
+	border: none;
+	border-bottom: var(--cga-stroke, 3px) solid var(--cga-border, var(--cga-input-border, #000000));
+	background: var(--cga-input-bg, #ffffff);
+	color: var(--cga-input-fg, #000000);
+	border-radius: 0;
+}
+
+.cga-dropdown__option:last-child {
+	border-bottom: none;
+}
+
+.cga-dropdown__option:hover {
+	background: var(--cga-dropdown-hover-bg, #000080);
+	color: var(--cga-dropdown-hover-fg, #ffffff);
+}
+
+.cga-spinbox {
+	display: inline-flex;
+	flex-direction: row;
+	align-items: stretch;
+	vertical-align: middle;
+	border: var(--cga-stroke, 3px) solid var(--cga-input-border, #000000);
+	background: var(--cga-input-bg, #ffffff);
+	color: var(--cga-input-fg, #000000);
+}
+
+.cga-spinbox__btn {
+	flex: 0 0 auto;
+	position: relative;
+	z-index: 0;
+	width: 1.5em;
+	min-width: 1.5em;
+	max-width: 1.5em;
+	padding: 0;
+	font-family: var(--cga-font);
+	font-size: 18px;
+	line-height: 1;
+	cursor: pointer;
+	border: none;
+	border-right: var(--cga-stroke, 3px) solid var(--cga-input-border, #000000);
+	background: var(--cga-button-bg, var(--cga-title-bg, #000000));
+	color: var(--cga-button-fg, #000000);
+	border-radius: 0;
+}
+
+.cga-spinbox__btn:last-child {
+	border-right: none;
+	border-left: var(--cga-stroke, 3px) solid var(--cga-input-border, #000000);
+}
+
+.cga-spinbox__btn:hover:not(:disabled) {
+	background: var(--cga-button-hover-bg, #000080);
+	color: var(--cga-button-hover-fg, #ffffff);
+}
+
+.cga-spinbox__btn:disabled {
+	opacity: 0.45;
+	cursor: default;
+}
+
+.cga-spinbox__field {
+	position: relative;
+	z-index: 1;
+	width: var(--ui-size-input-width, 3rem);
+	min-width: 2rem;
+	padding: 1px 4px;
+	font-family: var(--cga-font);
+	font-size: 18px;
+	text-align: center;
+	border: none;
+	background: transparent;
+	color: inherit;
+	border-radius: 0;
+}
+
+.cga-spinbox__field:focus {
+	outline: var(--cga-stroke, 3px) dotted var(--cga-border, #000000);
+	outline-offset: -2px;
+}
+
+.cga-spinbox__field:disabled {
+	opacity: 0.45;
+}
+
+.cga-dd.tool-select {
+	max-width: var(--ui-tool-select-max-width, min(24ch, 100%));
+	width: auto;
+	flex: 0 1 auto;
+}
+
+.cga-dd.pattern-select {
+	max-width: var(--ui-pattern-select-max-width, min(18ch, 100%));
+	flex: 0 1 auto;
+}
+
+.cga-dd.line-cap-select {
+	max-width: var(--ui-line-cap-select-max-width, min(11ch, 100%));
+	flex: 0 1 auto;
+}
+
+.cga-dd.cga-set-select {
+	max-width: var(--ui-cga-select-max-width, min(20ch, 100%));
+	flex: 0 1 auto;
+}
+
+.scale-control {
+	display: inline-flex;
+	flex-direction: row;
+	flex: 0 0 auto;
+	align-items: center;
+	gap: var(--ui-gap-xs, 4px);
+}
+
+.cga-spin.zoom-spin .cga-spinbox__field {
+	width: var(--ui-zoom-input-width, 3rem);
+}
+
+.canvas-wrap {
+	position: relative;
+	display: block;
+	flex-shrink: 0;
+	align-self: flex-start;
+	width: fit-content;
+	height: fit-content;
+	border: var(--cga-stroke, 3px) solid var(--cga-border, #000000);
+	background: #000000;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+}
+
+.canvas-wrap canvas {
+	display: block;
+	max-width: none;
+	width: auto;
+	height: auto;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
+}
+
+.palette-swatch-bar {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--ui-palette-row-gap, 12px);
+}
+
+.palette-extras {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--ui-gap-md, 8px);
+	align-items: center;
+}
+
+.palette-extras label {
+	display: flex;
+	align-items: center;
+	gap: var(--ui-gap-xs, 4px);
+	font-size: 18px;
+	color: inherit;
+}
+
+.swatch-row {
+	display: flex;
+	gap: var(--ui-gap-xs, 4px);
+}
+
+.swatch {
+	width: var(--ui-swatch-side, 28px);
+	height: var(--ui-swatch-side, 28px);
+	border: var(--cga-stroke, 3px) solid var(--cga-border, #000000);
+	cursor: pointer;
+}
+
+.swatch[data-role="fg"] {
+	outline: var(--cga-stroke, 3px) solid var(--cga-border, #000000);
+	outline-offset: 1px;
+}
+
+.status-bar {
+	border-top: var(--cga-stroke, 3px) solid var(--cga-border, #000000);
+	padding: 2px 6px;
+	background: var(--cga-panel-bg, #ffffff);
+	color: var(--cga-panel-fg, #000000);
+	font-family: var(--cga-font);
+	font-size: 18px;
+}
