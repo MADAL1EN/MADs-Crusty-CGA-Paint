@@ -20,7 +20,7 @@ export function quantizeImageDataToSurface(
 	const data: Uint8ClampedArray = imageData.data;
 	const w: number = imageData.width;
 	const h: number = imageData.height;
-	const frameColors: ReadonlyArray<{ r: number; g: number; b: number }> = [];
+	const frameColors: Array<{ r: number; g: number; b: number }> = [];
 	for (let i: number = 0; i < 4; i += 1) {
 		frameColors.push(getRgbForPixel(i, palette));
 	}
